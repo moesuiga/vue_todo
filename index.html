@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=divice-width, user-scalable=No, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta name="Generator" content="sublime text">
+	<meta name="Author" content="wayowe">
+	<meta name="Website" content="https://moesuiga.github.io/">
+	<meta name="Keyword" content="vue练习">
+	<meta name="Description" content="初学vue练习">
+	<title>类TODO|初学vue</title>
+	<link rel="stylesheet" href="./css/index.css">
+	<script src="./js/vue242.js"></script>
+</head>
+<body>
+<!-- 网易音乐外链 -->
+	<!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=26560408&auto=1&height=66"></iframe> -->
+	<div id="app">
+		<h1>类TODO待办记事</h1>
+		<div class="top">
+			<input @keyup.enter="addThing" type="text" v-model.trim="thing" placeholder="请输入待办事项">
+			<button @click="addThing">添加</button>
+		</div>
+		<div class="count">
+			<span class="total-count">{{data.length}} 全部</span>
+			<span class="finished-count">{{data | finished}} 已完成</span>
+			<span class="non-finished">{{data | notFinished}} 待办</span>
+		</div>
+		<ul class="things">
+			<li v-bind:class="{thing_list: true, finished: item.isFinished}" v-for="(item, index) in data" :key="index">
+				<div class="show-content" v-show="!item.isEditing">
+					<input class="check-finished" @change="saveData()" type="checkbox" v-model="item.isFinished">
+					<label class="thing_content" @dblclick="editData(item.isFinished,item.id)">{{item.thing}}</label>
+					<a class="del_thing" @click="delThing(item.id)" href="javascript:;">&times;</a>
+				</div>
+				<div class="show-edit" v-show="item.isEditing" @submit="editOver(item.id)">
+					<input ref="editInput" class="edit-thing" type="text" v-model.trim="item.thing" @blur="editOver(item.id)" @keyup.enter="editOver(item.id)" placeholder="请勿留空">
+				</div>
+			</li>
+		</ul>
+	</div>
+	<footer class="info">
+		<p>双击编辑待办事项</p>
+		<p>By: <a href="https://moesuiga.github.io/">wayowe</a></p>
+		<p>Use: <a href="https://cn.vuejs.org/">Vue.js</a></p>
+	</footer>
+	<script src="./js/index.js"></script>
+</body>
+</html>

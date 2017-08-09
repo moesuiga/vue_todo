@@ -1,0 +1,197 @@
+/* 初始化 */
+
+html,
+body,
+h1,
+ul,
+li,
+div,
+label,
+input,
+form,
+a,
+button,
+footer,
+p {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+body{
+	background-color: #f8f8f8;
+	font-size: 16px;
+	font-family: Georgia, Consolas, '楷体', serif;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+/* 主样式 */
+#app {
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+	padding: 20px;
+	border-radius: 20px 20px 0 0;
+	background-color: #fefefe;
+	box-shadow: 0 0 40px 5px #000;
+}
+/* 移动端 */
+@media 	screen and ( max-width : 460px) {
+	#app {
+		width: 80%;
+	}
+}
+/* 标题开始 */
+h1 {
+	font-size: 20px;
+	text-align: center;
+}
+/* 标题结束 */
+
+/* 头部添加待办事项开始 */
+.top {
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+}
+
+.top input {
+	float: left;
+	padding-left: 10px;
+	width: 85%;
+	height: 40px;
+	border: 1px solid #e2e2e2;
+	border-radius: 10px 0 0 10px;
+	outline: none;
+}
+
+.top button {
+	float: left;
+	width: 15%;
+	height: 40px;
+	border: 1px solid #e2e2e2;
+	color: #fff;
+	background-color: #c4c4c4;
+	outline: none;
+}
+/* 头部添加待办事项结束 */
+
+
+/* 计数部分开始 */
+.count {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	font-family: 'Times New Roman', 'fangsong', serif;
+}
+/* 计数部分结束 */
+
+/* 记事部分开始 */
+.things {
+	width: 100%;
+	background-color: #f2f2f2;
+}
+
+.things .thing_list {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	box-shadow: 0 2px 5px #333;
+}
+
+.thing_list  .show-content {
+	padding-left: 20px;
+	padding-right: 20px;
+	height: 100%;
+	overflow: hidden;
+}
+
+.thing_list .check-finished {
+	float: left;
+	margin-top: 10px;
+	width: 20px;
+	height: 20px;
+}
+
+.thing_list .thing_content {
+	display: inline-block;
+	padding-left: 10px;
+	width: 80%;
+	height: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 18px;
+}
+
+.thing_list .del_thing {
+	float: right;
+	height: 100%;
+	font-size: 24px;
+	color: #a1a1a1;
+	opacity: 0;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	-ms-transition: all .3s;
+}
+
+@media screen and (max-width: 460px) {
+	.thing_list .del_thing {
+		opacity: 1;
+	}
+}
+
+.thing_list:hover .del_thing {
+	opacity: 1;
+}
+
+.thing_list .del_thing:hover {
+	color: #345;
+}
+
+
+.thing_list.finished .thing_content {
+	color: #ccc;
+}
+
+.thing_list .show-edit {
+	height: 100%;
+}
+
+.thing_list .edit-thing {
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+	padding-left: 20px;
+	/* border: 1px solid #000; */
+	border: 0;
+	font-size: 18px;
+	font-family: Consolas, 'simsun', serif;
+	background-color: #fff;
+	outline: none;
+}
+/* 记事部分结束 */
+
+/* 底部信息部分开始 */
+.info {
+	margin-top: 50px;
+	color: #3c3c3c;
+	text-align: center;
+	font-family: Consolas, '仿宋', serif;
+}
+
+.info a:hover {
+	text-decoration: underline;
+}
+/* 底部信息部分结束 
