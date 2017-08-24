@@ -13,8 +13,6 @@
 	<script src="./js/vue242.js"></script>
 </head>
 <body>
-<!-- 网易音乐外链 -->
-	<!-- <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=26560408&auto=1&height=66"></iframe> -->
 	<div id="app">
 		<h1>类TODO待办记事</h1>
 		<div class="top">
@@ -22,12 +20,12 @@
 			<button @click="addThing">添加</button>
 		</div>
 		<div class="count">
-			<span class="total-count">{{data.length}} 全部</span>
-			<span class="finished-count">{{data | finished}} 已完成</span>
-			<span class="non-finished">{{data | notFinished}} 待办</span>
+			<span class="total-count" @click="show('all')">{{data.length}} 全部</span>
+			<span class="finished-count" @click="show('finished')">{{data | finished}} 已完成</span>
+			<span class="non-finished" @click="show('notFinished')">{{data | notFinished}} 待办</span>
 		</div>
 		<ul class="things">
-			<li v-bind:class="{thing_list: true, finished: item.isFinished}" v-for="(item, index) in data" :key="index">
+			<li v-bind:class="{thing_list: true, finished: item.isFinished}" v-for="(item, index) in filterData" :key="index">
 				<div class="show-content" v-show="!item.isEditing">
 					<input class="check-finished" @change="saveData()" type="checkbox" v-model="item.isFinished">
 					<label class="thing_content" @dblclick="editData(item.isFinished,item.id)">{{item.thing}}</label>

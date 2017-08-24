@@ -4,10 +4,35 @@ var vm = new Vue({
 		data: JSON.parse(localStorage.getItem('like_todos_data')) || [],
 		id: 0,
 		thing: '',
+		category: 'showAll'
+	},
+	computed: {
+		// 筛选数据显示
+		filterData(){
+			var data = this.data;
+			var arr = [];
+			if(this.category == 'showAll'){
+				return data;
+			} else if(this.category == 'showFinished'){
+				for(var i = 0; i < data.length; i++){
+					if(data[i].isFinished){
+						arr.push(data[i]);
+					}
+				}
+				return arr;
+			} else if(this.category == 'notFinished'){
+				for(var i = 0; i < data.length; i++){
+					if(!data[i].isFinished){
+						arr.push(data[i]);
+					}
+				}
+				return arr;
+			}
+		}
 	},
 	methods: {
 		// 添加数据
-		addThing: function(){
+		addThing(){
 			if(this.thing == ''){
 				alert('请输入内容后添加');
 				return;
@@ -29,12 +54,12 @@ var vm = new Vue({
 		},
 
 		// 保存数据到本地
-		saveData: function(){
+		saveData(){
 			localStorage.setItem('like_todos_data', JSON.stringify(this.data));
 		},
 
 		// 根据id删除一条数据
-		delThing: function(id){
+		delThing(id){
 			// 先确认是否删除
 			if(!confirm('确认删除吗？')){
 				return;
@@ -49,7 +74,7 @@ var vm = new Vue({
 		},
 
 		// 双击文本内容，编辑内容
-		editData: function(isFinished,id){
+		editData(isFinished,id){
 			// 如果已完成，没必要编辑
 			if(isFinished){
 				return;
@@ -66,7 +91,7 @@ var vm = new Vue({
 		},
 
 		// 编辑好内容后，失去焦点，退出编辑，并保存数据
-		editOver: function(id){
+		editOver(id){
 			for(var i = 0; i < this.data.length; i++){
 				if(this.data[i].id == id){
 					this.data[i].isEditing = false;
@@ -79,11 +104,22 @@ var vm = new Vue({
 				}
 			}
 			this.saveData();
+		},
+
+		// 判断显示哪些数据
+		show(cate){
+			if(cate == 'all'){
+				this.category = 'showAll';
+			} else if(cate == 'finished') {
+				this.category = 'showFinished';
+			} else if(cate == 'notFinished') {
+				this.category = 'notFinished';
+			}
 		}
 	},
 	filters: {
 		// 计算已完成数目
-		finished: function(data){
+		finished(data){
 			var l = 0;
 			for(var i = 0; i < data.length; i++){
 				if(data[i].isFinished){
@@ -93,7 +129,7 @@ var vm = new Vue({
 			return l;
 		},
 		// 计算未完成数目
-		notFinished: function(data){
+		notFinished(data){
 			var l = 0;
 			for(var i = 0; i < data.length; i++){
 				if(!data[i].isFinished){
