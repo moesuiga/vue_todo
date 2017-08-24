@@ -94,6 +94,9 @@ h1 {
 	margin-left: 10px;
 	font-family: 'Times New Roman', 'fangsong', serif;
 }
+.count span {
+	cursor: pointer;
+}
 /* 计数部分结束 */
 
 /* 记事部分开始 */
@@ -194,4 +197,4 @@ h1 {
 .info a:hover {
 	text-decoration: underline;
 }
-/* 底部信息部分结束 
+/* 底部信息部分结束 */
